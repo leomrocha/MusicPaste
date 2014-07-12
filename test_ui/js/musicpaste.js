@@ -57,7 +57,8 @@ mainApp.directive('vexchord', function($compile){
 
 
 mainApp.controller('vextabController', ['$scope', function($scope) {
-    console.log("paper starting")
+    console.log("paper starting");
+    console.log($scope);
     $scope.vextabText = 
 "\
 tabstave notation=true \n\
@@ -79,32 +80,62 @@ notes 4-5-6/3 10/4 \
         "soprano_sax",
         "alto_sax",
         "tenor_sax",
-        "baritone_sax",
-        "flute",
-        "synth_drum"
+        "baritone_sax"//,
+        //"flute",
+        //"synth_drum"
         ];
     $scope.selectedInstrument = $scope.instruments[0];
     //TODO here add play/pause/select instrument  functions
+        //load posts index from json file ... FUTURE replace for somethign better
+    $scope.play = function(){
+            console.log($scope);
+            if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
+                //console.log("play");
+                $scope.playing = true;
+                console.log($scope.player);
+                $scope.player.play();
+            }
+            
+        };
+    
+    $scope.stop = function(){
+            console.log($scope);
+            if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
+                //console.log("stop");
+                $scope.playing = false;
+                $scope.player.stop();
+            }
+            
+        };
 }]);
   
 mainApp.directive('vextabPaper', ['$compile', function($compile) {
     console.log("paper starting")
     var canvas = document.createElement('canvas');
-    renderer = new Vex.Flow.Renderer( canvas,
+    var renderer = new Vex.Flow.Renderer( canvas,
                   //Vex.Flow.Renderer.Backends.RAPHAEL); //TODO support raphael
                   Vex.Flow.Renderer.Backends.CANVAS);
-    artist = new Vex.Flow.Artist(10, 10, 600, {scale: 1});
-    player = null;
+    var artist = new Vex.Flow.Artist(10, 10, 600, {scale: 1});
+    var player = null;
     
     if (Vex.Flow.Player) {
         opts = {};
         //if (options) opts.soundfont_url = options.soundfont_url;
         player = new Vex.Flow.Player(artist, opts);
+        //do not show default controls - changed to default on the vextab code
+        //player.removeControls();
     }
     vextab = new Vex.Flow.VexTab(artist);
 
     function link(scope, element, attrs) {
-    
+        //update parent things:
+        scope.canvas = canvas;
+        scope.artist = artist;
+        scope.vextab = vextab;
+        scope.player = player;
+        
+        console.log("parent scope??");
+        console.log(scope);
         var vextabText;
         function updateTab() {
             console.log("updating tab");
@@ -148,6 +179,7 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
     }
 
     return {
-      link: link
+        transclude:true,
+        link: link
     };
   }]);
