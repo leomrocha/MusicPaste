@@ -1,4 +1,4 @@
-var mainApp = angular.module("MusicPaste", ["ngRoute"]);
+var mainApp = angular.module("MusicPaste", ["ui.bootstrap"]);
 
 ////////////////////////////////////////////////////////////////////////////////
 // DIRECTIVES
@@ -60,10 +60,84 @@ mainApp.controller('vextabController', ['$scope', function($scope) {
     console.log("paper starting");
     console.log($scope);
     $scope.vextabText = 
-"\
+"\n\
 tabstave notation=true \n\
-notes 4-5-6/3 10/4 \
-\
+notes 4-5-6/3 10/4 \n\
+\n\
+tabstave notation=true clef=bass key=Ab time=C|\n\
+notes 4-5/6\n\
+\n\
+tabstave notation=true\n\
+notes 4-5-6/3 ## | 5-4-2/3 2/2\n\
+\n\
+tabstave notation=true tablature=false\n\
+notes C-D-E/4 #0# | C-D-E-F/4\n\
+\n\
+tabstave notation=true tablature=false\n\
+notes 4-5-6/3 ## =|: 5-4-2/3 2/2 =:|\n\
+\n\
+tabstave notation=true tablature=false\n\
+notes C-D-E/4 #0# =:: C-D-E-F/4 =|=\n\
+\n\
+tabstave notation=false\n\
+notes 4-5-6b7/3 10/4 | 5-4-2/3 2/2\n\
+\n\
+tabstave\n\
+notes 6-7b9b7/3 7/4 | 9-8-7-6/2\n\
+\n\
+tabstave notation=true\n\
+notes 4-5-6b7v/3 10/1 | 5d-4u-Xd/3 2v/2\n\
+\n\
+tabstave notation=true tablature=false\n\
+  notes (C/4.E/4.G/4) C-E-G/4\n\
+\n\
+tabstave notation=true\n\
+  notes (8/2.7b9b7/3) (5b6/2.5b6/3) 7/4 |\n\
+  notes (5/2.6/3.7/4)\n\
+\n\
+tabstave\n\
+  notes (5/2.5/3.7/4) 5h6/3 7/4 |\n\
+  notes t12p7p5h7/4 7/5 5s3/5\n\
+\n\
+tabstave\n\
+  notes (8/2.7b9b7/3) (5b6/2.5b6/3)v 7s0/4 |\n\
+  notes (5/2.6/3.7/4)v\n\
+\n\
+tabstave\n\
+  notes (5/4.5/5)s(7/4.7/5)s(5/4.5/5) (5/4.5/5)h(7/5) |\n\
+  notes t(12/5.12/4)s(5/5.5/4) 3b4/5 5V/6\n\
+\n\
+options space=10 font-size=12\n\
+\n\
+tabstave notation=true tablature=false\n\
+         time=4/4 key=Ab tuning=eb\n\
+  notes :q C-D-E-F/4 | G-A-B/4 C/5\n\
+  text :h,.1,C,Em,|\n\
+  text :h,G7,C\n\
+  text ++, .11, :w, This is a new text line.\n\
+\n\
+options space=15\n\
+tabstave notation=true\n\
+notes :q (8/2.7b9b7/3) (5b6/2.5b6/3)v :8 7s12/4\n\
+notes t:16:9s:8:3s:16:0/4\n\
+\n\
+tabstave notation=true key=A\n\
+notes :q (5/2.5/3.7/4) $.big.A7#9$ 5h6/3 7/4 |\n\
+notes :8 7/4 $.italic.sweep$ 6/3 5/2 3v/1 :q 7v/5 $.Arial-10-bold.P.H$ :8 3s5/5\n\
+\n\
+options font-size=14 space=15\n\
+\n\
+tabstave notation=true tablature=false\n\
+         time=4/4 clef=percussion\n\
+  notes :2S Bd/4 :qS Bd/4 :q ## | :8S Bd/4 Bu/4 :qS Bd-Bu-Bd/4 ^3^\n\
+  text :w, G Maj7, |, Am\n\
+\n\
+options space=12 font-size=14\n\
+        tab-stems=true tab-stem-direction=up\n\
+\n\
+tabstave time=4/4 key=A\n\
+notes :8 5/5 5/4 5/3 ^3^ :16 5-6-7-8/1 :8 9s10/1 :h s9v/1\n\
+\n\
 ";
     //TODO here add the player
     $scope.playing = false;
@@ -137,6 +211,10 @@ notes 4-5-6/3 10/4 \
             }
             
         };
+    $scope.save = function(){
+        console.log("save");
+    };
+    
 }]);
   
 mainApp.directive('vextabPaper', ['$compile', function($compile) {
