@@ -84,18 +84,21 @@
 
                 <div class="col-lg-7 col-md-7">
                         <div>
-                            <a class="btn btn-default btn-lg" ng-click="play()">
-                                <i class="fa fa-play fa-fw"></i>
-                                <span class="network-name">Play</span>
-                            </a>
-                            <a class="btn btn-default btn-lg" ng-click="stop()">
-                                <i class="fa fa-stop fa-fw"></i>
-                                <span class="network-name">Stop</span>
-                            </a>
-                            <span style="float:right;">
+                            <div class="col-lg-6 col-md-6">
+                                <a class="btn btn-default btn-lg" ng-click="play()">
+                                    <i class="fa fa-play fa-fw"></i>
+                                    <span class="network-name">Play</span>
+                                </a>
+                                <a class="btn btn-default btn-lg" ng-click="stop()">
+                                    <i class="fa fa-stop fa-fw"></i>
+                                    <span class="network-name">Stop</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
                             <!--Select your instrument:--> 
-                            <select ng-model="selectedInstrument" ng-change="onSelectInstrument(selectedInstrument)" ng-options="instrument for instrument in instruments"></select>
-                            </span>
+                                <select ng-model="selectedTempo" ng-change="onSelectTempo(selectedTempo)" ng-options="tempo for tempo in tempos"></select>
+                                <select ng-model="selectedInstrument" ng-change="onSelectInstrument(selectedInstrument)" ng-options="instrument for instrument in instruments"></select>
+                            </div>
                         </div>
                         <div>
                             <div data-vextab-paper="vextabText">
@@ -104,10 +107,16 @@
                 </div>
 
                 <div class="col-lg-5 col-md-5" >
-                    <!--<div class="editable" contenteditable="true">
-                    This is a sample text!
-                    </div>-->
-                    Edit the text below:
+                    <div>
+                        <div class="col-lg-5 col-md-5 ">
+                          Edit the text below:
+                        </div>
+                        <div class="col-lg-4 col-md-4 ">
+                        <button type="button" class="btn btn-default btn-lg">
+                          <span class="fa fa-save fa-fw"></span> Save & <span class="fa fa-share fa-fw"></span> Share 
+                        </button>
+                        </div>
+                    </div>
 
                     <div >
                         <textarea ng-model="vextabText" class="editor editable" rows="30" columns="40"></textarea>

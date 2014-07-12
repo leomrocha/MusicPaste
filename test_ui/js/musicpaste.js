@@ -84,7 +84,17 @@ notes 4-5-6/3 10/4 \
         //"flute",
         //"synth_drum"
         ];
+        
     $scope.selectedInstrument = $scope.instruments[0];
+    
+    $scope.tempos = [
+        40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 
+        72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 
+        120, 126, 132, 138, 144, 152, 160, 168, 176, 184, 
+        192, 200, 208, 220
+        ];
+    $scope.selectedTempo = 80;
+    
     //TODO here add play/pause/select instrument  functions
         //load posts index from json file ... FUTURE replace for somethign better
     $scope.onSelectInstrument = function(instrument){
@@ -93,6 +103,13 @@ notes 4-5-6/3 10/4 \
         if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
                 //set instrument 
                 $scope.player.setInstrument(instrument);
+            }
+    };
+    $scope.onSelectTempo = function(tempo){
+        $scope.selectedTempo = tempo;
+        if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
+                //set instrument 
+                $scope.player.setTempo(tempo);
             }
     };
     $scope.play = function(){
