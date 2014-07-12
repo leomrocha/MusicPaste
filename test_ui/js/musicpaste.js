@@ -92,7 +92,7 @@ notes 4-5-6/3 10/4 \
         $scope.selectedInstrument = instrument;
         if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
                 //set instrument 
-                $scope.player.render(instrument);
+                $scope.player.setInstrument(instrument);
             }
     };
     $scope.play = function(){
@@ -169,7 +169,7 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
             //reposition player because something breaks on the default
             if(player !== null && player !== undefined){
                 console.log("player created: ", player);
-                player.fullReset();
+                player.fullReset(); //this is what makes the repaint correct
                 playerCanvas = element.find(".vextab-player");
                 scoreCanvas =  element.find(".vex-canvas");
                 //console.log("canvas = ", scoreCanvas);
