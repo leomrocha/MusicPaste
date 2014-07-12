@@ -87,25 +87,34 @@ notes 4-5-6/3 10/4 \
     $scope.selectedInstrument = $scope.instruments[0];
     //TODO here add play/pause/select instrument  functions
         //load posts index from json file ... FUTURE replace for somethign better
-    $scope.play = function(){
-            console.log($scope);
-            console.log("player = ");
-            console.log($scope.player);
-            if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
+    $scope.onSelectInstrument = function(instrument){
+        console.log("selecting instrument =", $scope.selectedInstrument);
+        $scope.selectedInstrument = instrument;
+        if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
                 //set instrument 
-                console.log("play");
-                $scope.playing = true;
+                $scope.player.render(instrument);
+            }
+    };
+    $scope.play = function(){
+            //console.log($scope);
+            //console.log("player = ");
+            //console.log($scope.player);
+            if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
+                //console.log("play");
+                //update player:
                 $scope.player.render();
-                console.log($scope.player);
+                $scope.playing = true;
+                //$scope.player.render();
+                //console.log($scope.player);
                 $scope.player.play();
             }
             
         };
     
     $scope.stop = function(){
-            console.log($scope);
+            //console.log($scope);
             if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
-                console.log("stop");
+                //console.log("stop");
                 $scope.playing = false;
                 $scope.player.stop();
             }
@@ -114,7 +123,7 @@ notes 4-5-6/3 10/4 \
 }]);
   
 mainApp.directive('vextabPaper', ['$compile', function($compile) {
-    console.log("paper starting")
+    //console.log("paper starting")
     var canvas = document.createElement('canvas');
     canvas.className = "vex-canvas";
     var renderer = new Vex.Flow.Renderer( canvas,
@@ -139,12 +148,10 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
         scope.vextab = vextab;
         scope.player = player;
         
-        console.log("parent scope??");
-        console.log(scope);
         var vextabText;
         function updateTab() {
-            console.log("updating tab");
-            console.log(vextabText);
+            //console.log("updating tab");
+            //console.log(vextabText);
             try {
                 vextab.reset();
                 artist.reset();
@@ -161,19 +168,27 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
             element.append(canvas);
             //reposition player because something breaks on the default
             if(player !== null && player !== undefined){
-                console.log("player created");
+                console.log("player created: ", player);
+                player.fullReset();
                 playerCanvas = element.find(".vextab-player");
                 scoreCanvas =  element.find(".vex-canvas");
-                console.log("canvas = ", scoreCanvas);
-                console.log(scoreCanvas.get(0).offsetTop);
-                console.log(scoreCanvas.get(0).offsetLeft);
-                playerCanvas.css("position", "absolute")
-                            .css("z-index", 10)
-                            //.css("top", scoreCanvas.get(0).offsetTop)
-                            //.css("left", scoreCanvas.get(0).offsetLeft)
-                            .css("top", 45)
-                            .css("left", 15)
-                            ;
+                //console.log("canvas = ", scoreCanvas);
+                //console.log(scoreCanvas.get(0).offsetTop);
+                //console.log(scoreCanvas.get(0).offsetLeft);
+                //playerCanvas.css("position", "absolute")
+                //            .css("z-index", 10)
+                //            //.css("top", scoreCanvas.get(0).offsetTop)
+                //            //.css("left", scoreCanvas.get(0).offsetLeft)
+                //            .css("top", 45)
+                //            .css("left", 15)
+                //            .css
+                //            ;
+                //playerCanvas.width = ;
+                //update canvas height
+                //console.log(playerCanvas);
+                playerCanvas.height = scoreCanvas.get(0).height;
+                //console.log(playerCanvas);
+                $compile(playerCanvas)(scope);
             }
         }
 

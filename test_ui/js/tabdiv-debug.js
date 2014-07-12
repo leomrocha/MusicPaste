@@ -2561,6 +2561,13 @@ $(function() {if (Vex.Flow.TabDiv.SEL) { Vex.Flow.TabDiv.start() }});
       return this.reset();
     };
 
+    Player.prototype.fullReset = function() {
+      this.reset();
+      this.paper = null;
+      $('.vextabPlayerOverlay').remove();
+      return this.interval_id = null;
+    };
+
     Player.prototype.reset = function() {
       this.artist.attachPlayer(this);
       this.tick_notes = {};

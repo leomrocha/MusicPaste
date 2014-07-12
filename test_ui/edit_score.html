@@ -94,7 +94,7 @@
                             </a>
                             <span style="float:right;">
                             <!--Select your instrument:--> 
-                            <select ng-model="selectedInstrument" ng-options="instrument for instrument in instruments"></select>
+                            <select ng-model="selectedInstrument" ng-change="onSelectInstrument(selectedInstrument)" ng-options="instrument for instrument in instruments"></select>
                             </span>
                         </div>
                         <div>
