@@ -2580,8 +2580,8 @@ $(function() {if (Vex.Flow.TabDiv.SEL) { Vex.Flow.TabDiv.start() }});
       var canvas, ctx, height, overlay, ps, width;
       overlay = $('<canvas class="vextabPlayerOverlay">');
       overlay.css("position", "absolute");
-      overlay.css("left", 0);
-      overlay.css("top", 0);
+      overlay.css("left", 15);
+      overlay.css("top", 45);
       overlay.addClass(overlay_class);
       if (context.canvas != null) {
         canvas = context.canvas;

@@ -89,9 +89,13 @@ notes 4-5-6/3 10/4 \
         //load posts index from json file ... FUTURE replace for somethign better
     $scope.play = function(){
             console.log($scope);
+            console.log("player = ");
+            console.log($scope.player);
             if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
-                //console.log("play");
+                //set instrument 
+                console.log("play");
                 $scope.playing = true;
+                $scope.player.render();
                 console.log($scope.player);
                 $scope.player.play();
             }
@@ -101,7 +105,7 @@ notes 4-5-6/3 10/4 \
     $scope.stop = function(){
             console.log($scope);
             if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
-                //console.log("stop");
+                console.log("stop");
                 $scope.playing = false;
                 $scope.player.stop();
             }
@@ -112,6 +116,7 @@ notes 4-5-6/3 10/4 \
 mainApp.directive('vextabPaper', ['$compile', function($compile) {
     console.log("paper starting")
     var canvas = document.createElement('canvas');
+    canvas.className = "vex-canvas";
     var renderer = new Vex.Flow.Renderer( canvas,
                   //Vex.Flow.Renderer.Backends.RAPHAEL); //TODO support raphael
                   Vex.Flow.Renderer.Backends.CANVAS);
@@ -158,10 +163,16 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
             if(player !== null && player !== undefined){
                 console.log("player created");
                 playerCanvas = element.find(".vextab-player");
+                scoreCanvas =  element.find(".vex-canvas");
+                console.log("canvas = ", scoreCanvas);
+                console.log(scoreCanvas.get(0).offsetTop);
+                console.log(scoreCanvas.get(0).offsetLeft);
                 playerCanvas.css("position", "absolute")
                             .css("z-index", 10)
-                            .css("top", element.get(0).offsetTop)
-                            .css("left", element.get(0).offsetLeft)
+                            //.css("top", scoreCanvas.get(0).offsetTop)
+                            //.css("left", scoreCanvas.get(0).offsetLeft)
+                            .css("top", 45)
+                            .css("left", 15)
                             ;
             }
         }
