@@ -57,8 +57,8 @@ mainApp.directive('vexchord', function($compile){
 
 
 mainApp.controller('vextabController', ['$scope', function($scope) {
-    console.log("paper starting");
-    console.log($scope);
+    //console.log("paper starting");
+    //console.log($scope);
     $scope.vextabText = 
 "\n\
 tabstave notation=true \n\
@@ -172,7 +172,7 @@ notes :8 5/5 5/4 5/3 ^3^ :16 5-6-7-8/1 :8 9s10/1 :h s9v/1\n\
     //TODO here add play/pause/select instrument  functions
         //load posts index from json file ... FUTURE replace for somethign better
     $scope.onSelectInstrument = function(instrument){
-        console.log("selecting instrument =", $scope.selectedInstrument);
+        //console.log("selecting instrument =", $scope.selectedInstrument);
         $scope.selectedInstrument = instrument;
         if( $scope.player !== null && $scope.player !== undefined && $scope.player !== 'undefined'){
                 //set instrument 
@@ -212,7 +212,8 @@ notes :8 5/5 5/4 5/3 ^3^ :16 5-6-7-8/1 :8 9s10/1 :h s9v/1\n\
             
         };
     $scope.save = function(){
-        console.log("save");
+        console.log("save TODO");
+        //TODO
     };
     
 }]);
@@ -263,7 +264,7 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
             element.append(canvas);
             //reposition player because something breaks on the default
             if(player !== null && player !== undefined){
-                console.log("player created: ", player);
+                //console.log("player created: ", player);
                 player.fullReset(); //this is what makes the repaint correct
                 playerCanvas = element.find(".vextab-player");
                 scoreCanvas =  element.find(".vex-canvas");
