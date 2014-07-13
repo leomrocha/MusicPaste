@@ -231,6 +231,7 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
     if (Vex.Flow.Player) {
         opts = {};
         //if (options) opts.soundfont_url = options.soundfont_url;
+        opts.soundfont_url = '../../static/musicapp/soundfont/'
         player = new Vex.Flow.Player(artist, opts);
         //do not show default controls - changed to default on the vextab code
         //player.removeControls();

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +11,8 @@
     <title>MusicPaste, Awesome, embeddable music TABs and scores with sound synthesis</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'musicapp/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'musicapp/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
     <style>
     .editable {
         width:95%;
@@ -140,28 +141,28 @@
     <!-- /.container -->
 
     <!-- JavaScript -->
-    <script src="js/jquery-1.10.2.js"></script> <!-- TODO update version-->
+    <script src="{% static 'musicapp/js/jquery-1.10.2.js' %}"></script> <!-- TODO update version-->
     <!--<script src="js/bootstrap.min.js"></script>-->
-    <script src="js/underscore-min.js"></script>
+    <script src="{% static 'musicapp/js/underscore-min.js' %}"></script>
     
     
     
-    <script src="js/angular.min.js"></script>
+    <script src="{% static 'musicapp/js/angular.min.js' %}"></script>
     <!--<script src="js/angular-route.js"></script>-->
-    <script src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <script src="{% static 'musicapp/js/ui-bootstrap-tpls-0.11.0.min.js' %}"></script>
     
         <!-- Base64 - for midi font loading-->
-    <script src="js/base64-binary.js"></script>
+    <script src="{% static 'musicapp/js/base64-binary.js' %}"></script>
     <!-- Paper JS - for midi player graphics-->
-    <script src="js/paper-core.min.js"></script>
+    <script src="{% static 'musicapp/js/paper-core.min.js' %}"></script>
 
-    <script src="js/MIDI.js"></script>
+    <script src="{% static 'musicapp/js/MIDI.js' %}"></script>
         
-    <script src="js/vexflow-min.js"></script>
+    <script src="{% static 'musicapp/js/vexflow-min.js' %}"></script>
     
-    <script src="js/tabdiv-debug.js"></script>
+    <script src="{% static 'musicapp/js/tabdiv-debug.js' %}"></script>
     
-    <script src="js/musicpaste.js"></script>
+    <script src="{% static 'musicapp/js/musicpaste.js' %}"></script>
 
 
 </body>
