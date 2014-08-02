@@ -1,25 +1,37 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from musicapp.forms import SheetForm
 from django.core.urlresolvers import reverse
-
+#shortcuts
+from django.shortcuts import get_object_or_404
 #email
 from django.core.mail import send_mail
 
-# Create your views here.
+#forms
+from musicapp.forms import SheetForm
+#models
+from musicapp.models import Sheet
 
+#INDEX
 def index(request):
+    """
+    """
     return render(request, 'musicapp/index.html')
 
+################################################################################
+#scores
+################################################################################
+
 def edit_score(request):
+    """
+    """
     if request.method == 'POST': # If the form has been submitted...
         form = SheetForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             form.save()
-            # TODO recover id an dlink to actually see the results (embed, edit and view)
-            embedlink = "embedlink"
-            viewlink = "viewlink"
-            editlink = "editlink"
+            # TODO recover id an dlink to actually see the results (embed, edit and display)
+            #embedlink = "embedlink"
+            #displaylink = "displaylink"
+            #editlink = "editlink"
             # TODO Send email to user
             
 
@@ -31,5 +43,27 @@ def edit_score(request):
         'form': form,
     })
 
+
+def display_score(request,score_id):
+    """
+    """
+    context = {}
+    #find the score by the given input score_id, redirect to 404 if not found
+    sheet = get_object_or_404(Sheet, id=score_id)
+    context["sheet"] = sheet
+    return render(request, 'musicapp/display_score.html', context)
+        
+
+def embed_score(request, score_id):
+    """
+    """
+    return render(request, 'musicapp/embed_score.html')
+
+################################################################################
+#
+################################################################################
+
 def thanks(request):
+    """
+    """
     return render(request, 'musicapp/thanks.html')

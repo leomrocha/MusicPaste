@@ -31,7 +31,8 @@ body, h1, h2, h3, h4, h5, h6 {
 .intro-message > h1 {
 	margin: 0;
 	font-size: 5em;
-	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.9);
+	color: #ff0052;
 }
 
 .intro-divider {
@@ -39,9 +40,14 @@ body, h1, h2, h3, h4, h5, h6 {
 	border-top: 1px solid #f8f8f8;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-
 .intro-message > h3 {
 	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+	color: #ff1a32;
+}
+
+.intro-message > h2 {
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.9);
+	color: #ff0052;
 }
 
 @media (max-width: 767px) {
