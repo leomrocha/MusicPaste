@@ -58,7 +58,11 @@ def display_score(request,score_id):
 def embed_score(request, score_id):
     """
     """
-    return render(request, 'musicapp/embed_score.html')
+    context = {}
+    #find the score by the given input score_id, redirect to 404 if not found
+    sheet = get_object_or_404(Sheet, id=score_id)
+    context["sheet"] = sheet
+    return render(request, 'musicapp/embed_score.html', context)
 
 ################################################################################
 #
