@@ -1,6 +1,75 @@
 {% extends "musicapp/base_score.html" %}
 
-{% block content %}
+
 
 Context = {{sheet}}
-{% endblock %}
+
+    {% block content %}
+        <div class="row">
+        
+            <div class="col-lg-12 col-md-12">
+                {% block page-header %}
+                <h1 class="page-header">
+                    <a href='/'>MusicPaste</a>
+                    <small>The easiest way to create and share music</small>
+                </h1>
+                {% endblock %}
+            
+            {% block sheet-meta %}
+            <div class="row center">
+                <h2> {{sheet.title}} </h2>
+                by: {{sheet.name}}
+            </div>
+            <div class="row">
+                {{sheet.description}}
+            </div>
+            {% endblock %}
+            </div>
+
+        </div>
+        <hr>
+        {% block sheet-all %}
+        <div class="row" ng-app="MusicPaste">
+            <div ng-controller="vextabController" ng-init="initText('{{sheet.content}}')">
+                {% block sheet-display-all%}
+                <div class="col-lg-7 col-md-7">
+                        {% block sheet-display-controls %}
+                        <div>
+                            <div class="col-lg-6 col-md-6">
+                                <a class="btn btn-default btn-lg" ng-click="play()">
+                                    <i class="fa fa-play fa-fw"></i>
+                                    <span class="network-name">Play</span>
+                                </a>
+                                <a class="btn btn-default btn-lg" ng-click="stop()">
+                                    <i class="fa fa-stop fa-fw"></i>
+                                    <span class="network-name">Stop</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                            <!--Select your instrument:--> 
+                                <select ng-model="selectedTempo" ng-change="onSelectTempo(selectedTempo)" ng-options="tempo for tempo in tempos"></select>
+                                <select ng-model="selectedInstrument" ng-change="onSelectInstrument(selectedInstrument)" ng-options="instrument for instrument in instruments"></select>
+                            </div>
+                        </div>
+                        {% endblock %}
+                        {% block sheet-display %}
+                        <div>
+                            <div data-vextab-paper="vextabText">
+                            </div>
+                        </div>
+                        {% endblock %}
+                </div>
+                {% endblock %}
+                {% block sheet-input %}
+                <div class="col-lg-5 col-md-5" >
+                    <div >
+                        <textarea form="save-form" id="id_content" name= "content" ng-model="vextabText" class="editor editable" rows="30" columns="40">{{sheet.content}}</textarea>
+                    </div>
+                    
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+        {% endblock %}
+    {% endblock %}
+

@@ -63,11 +63,12 @@
 
         </div>
         <hr>
-        
+        {% block sheet-all %}
         <div class="row" ng-app="MusicPaste">
             <div ng-controller="vextabController">
-
+                {% block sheet-display-all %}
                 <div class="col-lg-7 col-md-7">
+                        {% block sheet-display-controls %}
                         <div>
                             <div class="col-lg-6 col-md-6">
                                 <a class="btn btn-default btn-lg" ng-click="play()">
@@ -85,12 +86,16 @@
                                 <select ng-model="selectedInstrument" ng-change="onSelectInstrument(selectedInstrument)" ng-options="instrument for instrument in instruments"></select>
                             </div>
                         </div>
+                        {% endblock %}
+                        {% block sheet-display %}
                         <div>
                             <div data-vextab-paper="vextabText">
                             </div>
                         </div>
+                        {% endblock %}
                 </div>
-
+                {% endblock %}
+                {% block sheet-input %}
                 <div class="col-lg-5 col-md-5" >
                     <div>
                           Edit the text below:
@@ -101,7 +106,9 @@
                     </div>
                     
                 </div>
+                {% endblock %}
             </div>
         </div>
+        {% endblock %}
     {% endblock %}
 

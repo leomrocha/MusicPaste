@@ -139,6 +139,10 @@ tabstave time=4/4 key=A\n\
 notes :8 5/5 5/4 5/3 ^3^ :16 5-6-7-8/1 :8 9s10/1 :h s9v/1\n\
 \n\
 ";
+    $scope.initText = function(vextabText) {
+    //This function is sort of private constructor for controller
+        $scope.vextabText = vextabText;
+    };
     //TODO here add the player
     $scope.playing = false;
     $scope.instruments = [
@@ -231,7 +235,7 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
     if (Vex.Flow.Player) {
         opts = {};
         //if (options) opts.soundfont_url = options.soundfont_url;
-        opts.soundfont_url = '../../static/musicapp/soundfont/'
+        opts.soundfont_url = '/static/musicapp/soundfont/'
         player = new Vex.Flow.Player(artist, opts);
         //do not show default controls - changed to default on the vextab code
         //player.removeControls();

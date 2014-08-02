@@ -27,6 +27,7 @@ def edit_score(request):
     if request.method == 'POST': # If the form has been submitted...
         form = SheetForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
+            #TODO add data validationprint "Saving score: ", form
             form.save()
             # TODO recover id an dlink to actually see the results (embed, edit and display)
             #embedlink = "embedlink"
