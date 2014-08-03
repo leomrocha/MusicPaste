@@ -1,55 +1,37 @@
 {% extends "musicapp/base_score.html" %}
 
     {% block content %}
-        <div class="row">
-        
-            <div class="col-lg-12 col-md-12">
-            {% block sheet-meta %}
-            <div class="row center">
-                <h2> {{sheet.title}} </h2>
-                by: {{sheet.name}}
-            </div>
-            <div class="row">
-                {{sheet.description}}
-            </div>
-            {% endblock %}
-            </div>
-
-        </div>
-        <hr>
         {% block sheet-all %}
         <div class="row" ng-app="MusicPaste">
             <div ng-controller="vextabController" ng-init="initText('{{sheet.content}}')">
                 {% block sheet-display-all%}
-                <div class="col-lg-7 col-md-7">
+                <div class="col-lg-12 col-md-12  col-sm-12">
                         {% block sheet-display-controls %}
                         <div>
-                            <div class="col-lg-6 col-md-6">
-                                <a class="btn btn-default btn-lg" ng-click="play()">
+                            <div class="col-lg-6 col-md-6  col-sm-6">
+                                <strong >  {{sheet.title}}  </strong> by: {{sheet.name}}
+                                
+                                <a class="btn btn-default btn-sm" ng-click="play()">
                                     <i class="fa fa-play fa-fw"></i>
-                                    <span >Play</span>
                                 </a>
-                                <a class="btn btn-default btn-lg" ng-click="stop()">
+                                <a class="btn btn-default btn-sm" ng-click="stop()">
                                     <i class="fa fa-stop fa-fw"></i>
-                                    <span >Stop</span>
                                 </a>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
+                                
                             <!--Select your instrument:--> 
-                                <div class="row">
-                                    <select ng-model="selectedTempo" ng-change="onSelectTempo(selectedTempo)" ng-options="tempo for tempo in tempos"></select>
-                                    <select ng-model="selectedInstrument" ng-change="onSelectInstrument(selectedInstrument)" ng-options="instrument for instrument in instruments"></select>
-                                </div>
-                                <div class="row">
-                                    Created with: <a href='http://musicpaste.com'>MusicPaste.com</a>
-                                </div>
-                            </div>
+                                BPM: <select ng-model="selectedTempo" ng-change="onSelectTempo(selectedTempo)" ng-options="tempo for tempo in tempos"></select>
+                                <select ng-model="selectedInstrument" ng-change="onSelectInstrument(selectedInstrument)" ng-options="instrument for instrument in instruments"></select>
+                                <br/>
+                                <small> Made with: &copy; <a href="http://musicpaste.com"> MusicPaste</a></small>
                         </div>
                         {% endblock %}
                         {% block sheet-display %}
                         <div>
                             <div data-vextab-paper="vextabText">
                             </div>
+                        </div>
+                        <div>
+                            {{sheet.description}}
                         </div>
                         {% endblock %}
                 </div>
@@ -66,4 +48,5 @@
         </div>
         {% endblock %}
     {% endblock %}
-
+    {% block footer %}
+    {% endblock %}
