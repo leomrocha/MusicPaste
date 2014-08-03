@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 #email
 from django.core.mail import send_mail
+#
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 #forms
 from musicapp.forms import SheetForm
@@ -37,7 +39,10 @@ def edit_score(request):
             
 
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
+        else:
+            print "somehow the form is not valid"
     else:
+        print "somehow the method is not post"
         return render(request, 'musicapp/edit_score.html')
 
     return render(request, 'musicapp/edit_score.html', {
@@ -54,7 +59,7 @@ def display_score(request,score_id):
     context["sheet"] = sheet
     return render(request, 'musicapp/display_score.html', context)
         
-
+@xframe_options_exempt
 def embed_score(request, score_id):
     """
     """
