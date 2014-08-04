@@ -63,7 +63,7 @@ Context = {{sheet}}
                 {% block sheet-input %}
                 <div class="col-lg-5 col-md-5" >
                     <div >
-                        <textarea form="save-form" id="id_content" name= "content" ng-model="vextabText" class="editor editable" rows="30" columns="40">{{sheet.content}}</textarea>
+                        <textarea form="save-form" id="id_content" name= "content" ng-model="vextabText" class="editor editable" rows="30" columns="40" maxlength="8192">{{sheet.content}}</textarea>
                     </div>
                     
                 </div>

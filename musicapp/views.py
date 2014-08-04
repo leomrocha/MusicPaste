@@ -36,18 +36,19 @@ def edit_score(request):
             #displaylink = "displaylink"
             #editlink = "editlink"
             # TODO Send email to user
-            
-
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
         else:
             print "somehow the form is not valid"
+            #reload the page but with the elements given already pre-filled 
+            #and a alarm telling the error
+            #TODO modify the template to take in account the given post data
+            return render(request, 'musicapp/edit_score.html', {
+                'form': form,
+            })
     else:
-        print "somehow the method is not post"
         return render(request, 'musicapp/edit_score.html')
 
-    return render(request, 'musicapp/edit_score.html', {
-        'form': form,
-    })
+    
 
 
 def display_score(request,score_id):

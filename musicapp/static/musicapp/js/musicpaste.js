@@ -285,7 +285,7 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
                 scope.parseOK = parseOK;
                 if (e.hasOwnProperty("message")){
                     //console.log("getting the message: ", e["message"]);
-                    scope.parseError = e["message"];
+                    scope.parseError = e["message"].toLowerCase();
                 }else{
                     //console.log("writing no matter what");
                     scope.parseError = "Unknown parse Error";
