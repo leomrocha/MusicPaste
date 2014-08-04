@@ -100,11 +100,15 @@
                     <div>
                           Edit the text below:
                     </div>
-
-                    <div >
+                    <div>
                         <textarea form="save-form" id="id_content" name= "content" ng-model="vextabText" class="editor editable" rows="30" columns="40"></textarea>
                     </div>
-                    
+                    <div class="parseResults" style="color:#960003;" ng-show="parseOK === false">
+                        <p>
+                        Parse Error:
+                        </p>
+                        <p id="parseError" ><pre style="background-color:#ecc7c8;">{$ parseError $}</pre></p>
+                    </div>                    
                 </div>
                 {% endblock %}
             </div>
