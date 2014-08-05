@@ -41,6 +41,8 @@ def edit_score(request):
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
         else:
             print "The form is not valid"
+            print form.errors
+            print "is not valid because ... ?"
             #reload the page but with the elements given already pre-filled 
             #and a warning telling about the errors
             #TODO modify the template to take in account the given post data
@@ -58,7 +60,7 @@ def display_score(request,score_id):
     """
     context = {}
     #find the score by the given input score_id, redirect to 404 if not found
-    sheet = get_object_or_404(Sheet, id=score_id)
+    sheet = get_object_or_404(Sheet, suuid=score_id)
     context["sheet"] = sheet
     return render(request, 'musicapp/display_score.html', context)
         
@@ -68,7 +70,7 @@ def embed_score(request, score_id):
     """
     context = {}
     #find the score by the given input score_id, redirect to 404 if not found
-    sheet = get_object_or_404(Sheet, id=score_id)
+    sheet = get_object_or_404(Sheet, suuid=score_id)
     context["sheet"] = sheet
     return render(request, 'musicapp/embed_score.html', context)
 
