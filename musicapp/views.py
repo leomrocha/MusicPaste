@@ -28,6 +28,8 @@ def edit_score(request):
     """
     if request.method == 'POST': # If the form has been submitted...
         form = SheetForm(request.POST) # A form bound to the POST data
+        print "dir(form): ", dir(form)
+        print "form: ", form.fields
         if form.is_valid(): # All validation rules pass
             #TODO add data validationprint "Saving score: ", form
             form.save()
@@ -38,9 +40,9 @@ def edit_score(request):
             # TODO Send email to user
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
         else:
-            print "somehow the form is not valid"
+            print "The form is not valid"
             #reload the page but with the elements given already pre-filled 
-            #and a alarm telling the error
+            #and a warning telling about the errors
             #TODO modify the template to take in account the given post data
             return render(request, 'musicapp/edit_score.html', {
                 'form': form,

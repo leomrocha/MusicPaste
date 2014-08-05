@@ -154,7 +154,7 @@ notes :8 5/5 5/4 5/3 ^3^ :16 5-6-7-8/1 :8 9s10/1 :h s9v/1\n\
     //This function is sort of private constructor for controller
         $scope.vextabText = vextabText;
     };
-    //TODO here add the player
+    //here add the player characteristics
     $scope.playing = false;
     $scope.instruments = [
         "acoustic_grand_piano",
