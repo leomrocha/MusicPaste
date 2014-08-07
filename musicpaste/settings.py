@@ -7,7 +7,7 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
-
+###############################################################################
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -16,9 +16,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
+###############################################################################
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'wdi&tjhq6m*b7!e8$og1e%7njrop4dks6t%rbus+1ejc6x@9p8'
 
+###############################################################################
+#Server mode: Debug/Production
+###############################################################################
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -26,7 +30,16 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+###############################################################################
+#Email configuration
+###############################################################################
+EMAIL_HOST = "mail.musicpaste.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "no-reply@musicpaste.com"
+EMAIL_HOST_PASSWORD = "qM!6*Dvn"
+EMAIL_USE_TLS = True
 
+###############################################################################
 # Application definition
 
 INSTALLED_APPS = (
@@ -103,3 +116,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+

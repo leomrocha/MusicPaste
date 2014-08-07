@@ -23,9 +23,8 @@ def vextab_validator(content):
 ################################################################################
 
 class SheetForm(ModelForm):
-    suuid = forms.CharField(max_length=64, required=False)
-    title = forms.CharField(max_length=100, required=True)
-    name = forms.CharField(max_length=100, required=True)
+    title = forms.CharField(max_length=100, required=True, validators=[validate_slug])
+    name = forms.CharField(max_length=100, required=True, validators=[validate_slug])
     email = forms.EmailField(max_length=254, required=True)
     #description = forms.CharField(max_length=512, required=False, validators=[validate_slug])  # TODO make it better to support punctuation symbols
     description = forms.CharField(max_length=512, required=False)
