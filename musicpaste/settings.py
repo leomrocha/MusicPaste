@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
     'musicapp',
 )
 
@@ -117,4 +118,17 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    # other finders..
+    'compressor.finders.CompressorFinder',
+)
 
+
+###############################################################################
+#Django Compressor
+
+#if not DEBUG:
+COMPRESS_ENABLED = True
+#COMPRESS_OFFLINE = True
