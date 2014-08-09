@@ -33,11 +33,14 @@ ALLOWED_HOSTS = []
 ###############################################################################
 #Email configuration
 ###############################################################################
-EMAIL_HOST = "mail.musicpaste.com"
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "no-reply@musicpaste.com"
-EMAIL_HOST_PASSWORD = "qM!6*Dvn"
-EMAIL_USE_TLS = True
+#With my email
+#EMAIL_HOST = "mail.musicpaste.com"
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = "no-reply@musicpaste.com"
+#EMAIL_HOST_PASSWORD = "qM!6*Dvn"
+#EMAIL_USE_TLS = True
+
+#With MANDRILL
 
 ###############################################################################
 # Application definition
@@ -128,16 +131,15 @@ STATICFILES_FINDERS = (
 
 ###############################################################################
 #Django Compressor
+##################
 
 #if not DEBUG:
 COMPRESS_ENABLED = True
 #COMPRESS_OFFLINE = True
 
-COMPRESS_YUGLIFY_BINARY = 'yuglify' # assumes yuglify is in your path
-COMPRESS_YUGLIFY_CSS_ARGUMENTS = '--terminal'
-COMPRESS_YUGLIFY_JS_ARGUMENTS = '--terminal'
-# New
-COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 
-                        'compressor.filters.yuglify.YUglifyCSSFilter']
-# New
-COMPRESS_JS_FILTERS = ['compressor.filters.yuglify.YUglifyJSFilter']
+#COMPRESS_YUGLIFY_BINARY = 'yuglify' # assumes yuglify is in your path
+#COMPRESS_YUGLIFY_CSS_ARGUMENTS = '--terminal'
+#COMPRESS_YUGLIFY_JS_ARGUMENTS = '--terminal'
+#COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 
+#                        'compressor.filters.yuglify.YUglifyCSSFilter']
+#COMPRESS_JS_FILTERS = ['compressor.filters.yuglify.YUglifyJSFilter']

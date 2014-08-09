@@ -31,12 +31,16 @@ def edit_score(request):
         print "dir(form): ", dir(form)
         print "form: ", form.fields
         if form.is_valid(): # All validation rules pass
-            #TODO add data validationprint "Saving score: ", form
-            form.save()
-            # TODO recover id an dlink to actually see the results (embed, edit and display)
-            #embedlink = "embedlink"
-            #displaylink = "displaylink"
+            new_sheet = form.save()
+            #print "new sheet = ", new_sheet
+            # links to see the results (embed and display)
+            embed_link = request.build_absolute_uri(reverse('embed_score', args=[new_sheet.suuid]))
+            display_link = request.build_absolute_uri(reverse('display_score', args=[new_sheet.suuid]))
+            #print "links: "
+            #print embed_link
+            #print display_link
             #editlink = "editlink"
+            #TODO build email
             # TODO Send email to user
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
         else:
