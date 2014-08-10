@@ -4,9 +4,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
         <!-- Facebook sharing information tags -->
-        <meta property="og:title" content="*|MC:SUBJECT|*" />
+        <meta property="og:title" content="{{subject}}" />
         
-        <title>*|MC:SUBJECT|*</title>
+        <title>{{subject}}</title>
 		<style type="text/css">
 			/* Client-specific Styles */
 			#outlook a{padding:0;} /* Force Outlook to provide a "view in browser" button. */
@@ -346,7 +346,7 @@
                                     	<tr>
                                         	<td valign="top">
                                             	<div mc:edit="std_preheader_content">
-                                                	 Here the links to the music sheets you just created with MusicPaste
+                                                	 Hi {{name}}! Here the links to the music sheets you just created with MusicPaste
                                                 </div>
                                             </td>
                                             <!-- *|IFNOT:ARCHIVE_PAGE|* -->
@@ -392,22 +392,23 @@
                                                     <tr>
                                                         <td valign="top">
                                                             <div mc:edit="std_content00">
-                                                                <h2 class="h1">Check your music sheet:</h2>
-                                                                <strong>Your amazing music sheet is <a href="{{}}"> here</a></strong> 
-                                                                Copy and paste the following text:
+                                                                <h1 class="h1">Hi {{name}}!</h1>
+                                                                <h2 class="h2"> {{title}} </h2>
+                                                                <strong>Your amazing music sheet is <a href="{{display_link}}"> here</a></strong> 
+                                                                <br/>
+                                                                <br/>
+                                                                If the link doesn't work, copy and paste the following link:
                                                                 <br/>
                                                                 <pre> {{display_link}} </pre>
                                                                 <br />
-                                                                if the link above doesn't work.
                                                                 <br />
-                                                                <br />
-                                                                <h2 class="h1">Embed your music sheet:</h2>
+                                                                <h2 class="h2">Embed your music sheet:</h2>
                                                                 <p>
                                                                 To embed your music sheet in yort blog or web page copy the text below:
                                                                 </p>
                                                                 <p>
                                                                 
-                                                                    &lt;iframe src=&quot;{{embed_score}}&quot; width=&quot;640px&quot; height=&quot;480px&quot;&gt;
+                                                                    &lt;iframe src=&quot;{{embed_link}}&quot; width=&quot;640px&quot; height=&quot;480px&quot;&gt;
                                                                     &lt;p&gt;Your browser does not support iframes.&lt;/p&gt;
                                                                     &lt;/iframe&gt;
                                                                     

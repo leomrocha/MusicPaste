@@ -5,6 +5,9 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 #email
 from django.core.mail import send_mail
+#templates
+from django.template import loader, Context
+
 #
 from django.views.decorators.clickjacking import xframe_options_exempt
 
@@ -34,6 +37,7 @@ def edit_score(request):
             new_sheet = form.save()
             #print "new sheet = ", new_sheet
             # links to see the results (embed and display)
+            subject = "Hi %s! Here your newly created music sheets", new_sheet.name
             embed_link = request.build_absolute_uri(reverse('embed_score', args=[new_sheet.suuid]))
             display_link = request.build_absolute_uri(reverse('display_score', args=[new_sheet.suuid]))
             #print "links: "
@@ -41,7 +45,18 @@ def edit_score(request):
             #print display_link
             #editlink = "editlink"
             #TODO build email
+            email_context = {"subject": subject,
+                             "name": new_sheet.name,
+                             "title": new_sheet.title,
+                             "embed_link": embed_link,
+                             "display_link": display_link,
+                             }
+            t = loader.get_template('simple_basic.email')
+            c = Context(email_context)
+            rendered = t.render(c)
+            print "sending email"
             # TODO Send email to user
+            #Redirect if everything went great
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
         else:
             print "The form is not valid"

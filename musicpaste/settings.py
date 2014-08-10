@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 ###############################################################################
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -41,6 +42,17 @@ ALLOWED_HOSTS = []
 #EMAIL_USE_TLS = True
 
 #With MANDRILL
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
+EMAIL_USE_TLS = True
+
+#email templates
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'musicapp/templates').replace('\\','/'),
+    os.path.join(BASE_DIR, 'musicapp/templates/templated_email').replace('\\','/'),
+)
 
 ###############################################################################
 # Application definition
@@ -112,7 +124,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-import os
+#import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
