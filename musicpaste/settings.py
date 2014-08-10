@@ -25,9 +25,9 @@ SECRET_KEY = 'wdi&tjhq6m*b7!e8$og1e%7njrop4dks6t%rbus+1ejc6x@9p8'
 #Server mode: Debug/Production
 ###############################################################################
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -148,7 +148,7 @@ STATICFILES_FINDERS = (
 
 #if not DEBUG:
 COMPRESS_ENABLED = True
-#COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = True
 
 #COMPRESS_YUGLIFY_BINARY = 'yuglify' # assumes yuglify is in your path
 #COMPRESS_YUGLIFY_CSS_ARGUMENTS = '--terminal'
