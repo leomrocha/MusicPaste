@@ -27,7 +27,7 @@ SECRET_KEY = 'wdi&tjhq6m*b7!e8$og1e%7njrop4dks6t%rbus+1ejc6x@9p8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -132,6 +132,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'musicapp/static'),
+    os.path.join(BASE_DIR, 'musicapp/static/musicapp'),
 )
 
 STATICFILES_FINDERS = (
