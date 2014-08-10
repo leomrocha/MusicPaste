@@ -51,20 +51,20 @@ def edit_score(request):
             htmly = loader.get_template('simple_basic_inlined.email')
             plaintext = loader.get_template('simple_basic.txt')
             c = Context(email_context)
-            print "sending email"
-            sys.stdout.flush()
-            try:
-                from_email = 'MusicPaste - Link Service <no-reply@musicpaste.com>'
-                text_content = plaintext.render(c)
-                html_content = htmly.render(c)
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [new_sheet.email])
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                print "email sent"
-                sys.stdout.flush()
-            except Exception as e:
-                print "ERROR sending email: ", e
-                sys.stdout.flush()
+            print >> sys.stderr, "sending email"
+            sys.stderr.flush()
+            #try:
+            from_email = 'MusicPaste - Link Service <no-reply@musicpaste.com>'
+            text_content = plaintext.render(c)
+            html_content = htmly.render(c)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [new_sheet.email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            print >> sys.stderr, "email sent"
+            sys.stderr.flush()
+            #except Exception as e:
+            #    print "ERROR sending email: ", e
+            #    sys.stdout.flush()
             #TODO redirect to page error
             #Redirect if everything went great
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
