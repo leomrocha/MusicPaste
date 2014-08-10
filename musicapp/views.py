@@ -32,8 +32,6 @@ def edit_score(request):
     """
     if request.method == 'POST': # If the form has been submitted...
         form = SheetForm(request.POST) # A form bound to the POST data
-        print "dir(form): ", dir(form)
-        print "form: ", form.fields
         if form.is_valid(): # All validation rules pass
             new_sheet = form.save()
             #print "new sheet = ", new_sheet
@@ -41,11 +39,7 @@ def edit_score(request):
             subject = "Hi %s! Here your newly created music sheets" % new_sheet.name
             embed_link = request.build_absolute_uri(reverse('embed_score', args=[new_sheet.suuid]))
             display_link = request.build_absolute_uri(reverse('display_score', args=[new_sheet.suuid]))
-            #print "links: "
-            #print embed_link
-            #print display_link
-            #editlink = "editlink"
-            #TODO build email
+            #build email
             email_context = {"subject": subject,
                              "name": new_sheet.name,
                              "title": new_sheet.title,
@@ -55,17 +49,17 @@ def edit_score(request):
             htmly = loader.get_template('simple_basic_inlined.email')
             plaintext = loader.get_template('simple_basic.txt')
             c = Context(email_context)
-            print "sending email"
-            try:
-                from_email = 'MusicPaste - Link Service <no-reply@musicpaste.com>'
-                text_content = plaintext.render(c)
-                html_content = htmly.render(c)
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [new_sheet.email])
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-            except:
-                print "ERROR sending email, please try later"
-                #TODO redirect to page error
+            #print "sending email"
+            #try:
+            from_email = 'MusicPaste - Link Service <no-reply@musicpaste.com>'
+            text_content = plaintext.render(c)
+            html_content = htmly.render(c)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [new_sheet.email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            #except:
+            #    print "ERROR sending email, please try later"
+            #TODO redirect to page error
             #Redirect if everything went great
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
         else:
