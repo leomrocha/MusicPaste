@@ -462,7 +462,7 @@
                                                     <tr>
                                                         <td colspan="2" valign="middle" id="utility">
                                                             <div mc:edit="std_utility">
-                                                                You are receiving this email because you or someone entered your email address in the musicpaste.com site.
+                                                                You are receiving this email because you or someone created a music sheet with this email address in the musicpaste.com site.
                                                             </div>
                                                             <!--<div mc:edit="std_utility">
                                                                 &nbsp;<a href="*|UNSUB|*">unsubscribe from this list</a> | <a href="*|UPDATE_PROFILE|*">update subscription preferences</a>&nbsp;

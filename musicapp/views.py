@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 #email
 from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 #templates
 from django.template import loader, Context
 
@@ -51,13 +52,20 @@ def edit_score(request):
                              "embed_link": embed_link,
                              "display_link": display_link,
                              }
-            t = loader.get_template('simple_basic.email')
+            htmly = loader.get_template('simple_basic_inlined.email')
+            plaintext = loader.get_template('simple_basic.txt')
             c = Context(email_context)
-            message = t.render(c)
             print "sending email"
-            send_mail(subject, message, 'no-reply@musicpaste.com',
-                        [new_sheet.email], fail_silently=False)
-            # TODO Send email to user
+            try:
+                from_email = 'MusicPaste - Link Service <no-reply@musicpaste.com>'
+                text_content = plaintext.render(c)
+                html_content = htmly.render(c)
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [new_sheet.email])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+            except:
+                print "ERROR sending email, please try later"
+                #TODO redirect to page error
             #Redirect if everything went great
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
         else:
