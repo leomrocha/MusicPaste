@@ -25,9 +25,9 @@ SECRET_KEY = 'wdi&tjhq6m*b7!e8$og1e%7njrop4dks6t%rbus+1ejc6x@9p8'
 #Server mode: Debug/Production
 ###############################################################################
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
