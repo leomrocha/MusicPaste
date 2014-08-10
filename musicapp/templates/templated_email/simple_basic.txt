@@ -1,0 +1,21 @@
+{{subject}}
+
+Hi {{name}}!
+
+{{title}}
+
+Your amazing music sheet is at: {{display_link}}
+
+To embed your music sheet in yort blog or web page copy the text below:
+
+
+    <iframe src="{{embed_link}}" width="640px" height="480px">
+    Your browser does not support iframes.
+    </iframe>
+
+
+Keep on loving music!
+
+
+You are receiving this email because you or someone entered your email address in the musicpaste.com site.
+

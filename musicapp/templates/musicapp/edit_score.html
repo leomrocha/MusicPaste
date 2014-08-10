@@ -1,0 +1,118 @@
+{% extends "musicapp/base_score.html" %}
+
+    {% block content %}
+        <div class="row">
+        
+            <div class="col-lg-12 col-md-12">
+                {% block page-header %}
+                <h1 class="page-header">
+                    <a href='/'>MusicPaste</a>
+                    <small>The easiest way to create and share music</small>
+                </h1>
+                {% endblock %}
+            
+            {% block modal-form %}
+            <!-- Button trigger modal -->
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+              <span class="fa fa-save fa-fw"></span> Save & <span class="fa fa-share fa-fw"></span> Share
+            </button>
+            
+                <!-- Modal -->
+                <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                    
+                        <!-- Little x button to close this modal -->
+                        <div class="modal-header" style="border: none">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </div>
+                      <div class="modal-body" style="padding: 0px 20px 20px 20px">
+                        
+                        <form role="form" id="save-form" action="{% url 'edit_score' %}" method="post">
+                          {% csrf_token %}
+                          <div class="form-group">
+                            <label for="id_title">Title</label>
+                            <input type="text" class="form-control" id="id_title" maxlength="100" name="title" placeholder="Title" required="true">
+                          </div>
+                          <div class="form-group">
+                            <label for="id_name">Your name</label>
+                            <input type="text" class="form-control" id="id_name" maxlength="100" name="name" placeholder="Your name"  required="true">
+                          </div>
+                          <div class="form-group">
+                            <label for="id_email">Email</label>
+                            <input type="email" class="form-control" id="id_email" maxlength="254" name="email" placeholder="Enter email"  required="true">
+                          </div>
+                          <div class="form-group">
+                            <label for="id_description">Description</label>
+                            <textarea cols="40" class="form-control" id="id_description" name="description" rows="10" placeholder="Description"></textarea>
+                          </div>
+                        
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <!--button type="button" class="btn btn-primary">
+                                <span class="fa fa-save fa-fw"></span> Save & <span class="fa fa-share fa-fw"></span> Share
+                            </button-->
+                            <button type="submit" class="btn btn-primary"><span class="fa fa-save fa-fw"></span> Save & <span class="fa fa-share fa-fw"></span> Share</button>
+                        </form>
+                      </div> <!-- /.modal-body -->
+                      
+                    </div>
+                  </div>
+                </div> <!-- /.modal -->
+            {% endblock %}
+            </div>
+
+        </div>
+        <hr>
+        {% block sheet-all %}
+        <div class="row" ng-app="MusicPaste">
+            <div ng-controller="vextabController">
+                {% block sheet-display-all %}
+                <div class="col-lg-7 col-md-7">
+                        {% block sheet-display-controls %}
+                        <div>
+                            <div class="col-lg-6 col-md-6">
+                                <a class="btn btn-default btn-lg" ng-click="play()">
+                                    <i class="fa fa-play fa-fw"></i>
+                                    <span class="network-name">Play</span>
+                                </a>
+                                <a class="btn btn-default btn-lg" ng-click="stop()">
+                                    <i class="fa fa-stop fa-fw"></i>
+                                    <span class="network-name">Stop</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                            <!--Select your instrument:--> 
+                                <select ng-model="selectedTempo" ng-change="onSelectTempo(selectedTempo)" ng-options="tempo for tempo in tempos"></select>
+                                <select ng-model="selectedInstrument" ng-change="onSelectInstrument(selectedInstrument)" ng-options="instrument for instrument in instruments"></select>
+                            </div>
+                        </div>
+                        {% endblock %}
+                        {% block sheet-display %}
+                        <div>
+                            <div data-vextab-paper="vextabText">
+                            </div>
+                        </div>
+                        {% endblock %}
+                </div>
+                {% endblock %}
+                {% block sheet-input %}
+                <div class="col-lg-5 col-md-5" >
+                    <div>
+                          Edit the text below:
+                    </div>
+                    <div>
+                        <textarea form="save-form" id="id_content" name= "content" ng-model="vextabText" class="editor editable" rows="25" columns="40" maxlength="8192"></textarea>
+                    </div>
+                    <div class="parseResults" style="color:#960003;" ng-show="parseOK === false">
+                        <p>
+                        Parse Error:
+                        </p>
+                        <p id="parseError" ><pre style="background-color:#ecc7c8;">{$ parseError $}</pre></p>
+                    </div>                    
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+        {% endblock %}
+    {% endblock %}
+

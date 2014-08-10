@@ -1,6 +1,13 @@
 var mainApp = angular.module("MusicPaste", ["ui.bootstrap"]);
 
 ////////////////////////////////////////////////////////////////////////////////
+//Avoid template collition between Django and AngularJS
+mainApp.config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('{$');
+    $interpolateProvider.endSymbol('$}');
+});
+
+////////////////////////////////////////////////////////////////////////////////
 // DIRECTIVES
 ////////////////////////////////////////////////////////////////////////////////
 /**
@@ -59,6 +66,10 @@ mainApp.directive('vexchord', function($compile){
 mainApp.controller('vextabController', ['$scope', function($scope) {
     //console.log("paper starting");
     //console.log($scope);
+    
+    $scope.parseOK = false;
+    $scope.parseError = "All is GOOOOD";
+    
     $scope.vextabText = 
 "\n\
 tabstave notation=true \n\
@@ -139,7 +150,11 @@ tabstave time=4/4 key=A\n\
 notes :8 5/5 5/4 5/3 ^3^ :16 5-6-7-8/1 :8 9s10/1 :h s9v/1\n\
 \n\
 ";
-    //TODO here add the player
+    $scope.initText = function(vextabText) {
+    //This function is sort of private constructor for controller
+        $scope.vextabText = vextabText;
+    };
+    //here add the player characteristics
     $scope.playing = false;
     $scope.instruments = [
         "acoustic_grand_piano",
@@ -231,6 +246,7 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
     if (Vex.Flow.Player) {
         opts = {};
         //if (options) opts.soundfont_url = options.soundfont_url;
+        opts.soundfont_url = '/static/musicapp/soundfont/'
         player = new Vex.Flow.Player(artist, opts);
         //do not show default controls - changed to default on the vextab code
         //player.removeControls();
@@ -243,6 +259,7 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
         scope.artist = artist;
         scope.vextab = vextab;
         scope.player = player;
+        var parseOK = false;
         
         var vextabText;
         function updateTab() {
@@ -255,10 +272,24 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
                 vextab.parse(vextabText);
                 artist.render(renderer);
                 //console.log("artist = ", artist);
+                //save parse status
+                parseOK = true;
+                scope.parseOK = parseOK;
+                scope.parseError = "parse OK";
             }
             catch (e) {
-                console.log("Error");
-                console.log(e);
+                //console.log("Error");
+                //console.log(e);
+                //indicate parsing failed
+                parseOK = false;
+                scope.parseOK = parseOK;
+                if (e.hasOwnProperty("message")){
+                    //console.log("getting the message: ", e["message"]);
+                    scope.parseError = e["message"].toLowerCase();
+                }else{
+                    //console.log("writing no matter what");
+                    scope.parseError = "Unknown parse Error";
+                }
             }      
             $compile(canvas)(scope);
             element.append(canvas);
@@ -268,18 +299,6 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
                 player.fullReset(); //this is what makes the repaint correct
                 playerCanvas = element.find(".vextab-player");
                 scoreCanvas =  element.find(".vex-canvas");
-                //console.log("canvas = ", scoreCanvas);
-                //console.log(scoreCanvas.get(0).offsetTop);
-                //console.log(scoreCanvas.get(0).offsetLeft);
-                //playerCanvas.css("position", "absolute")
-                //            .css("z-index", 10)
-                //            //.css("top", scoreCanvas.get(0).offsetTop)
-                //            //.css("left", scoreCanvas.get(0).offsetLeft)
-                //            .css("top", 45)
-                //            .css("left", 15)
-                //            .css
-                //            ;
-                //playerCanvas.width = ;
                 //update canvas height
                 //console.log(playerCanvas);
                 playerCanvas.height = scoreCanvas.get(0).height;
