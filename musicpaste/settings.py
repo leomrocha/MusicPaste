@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 ###############################################################################
 #Email configuration
 ###############################################################################
-#With my email
+#With musicpaste email
 EMAIL_HOST = "mail.musicpaste.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "no-reply@musicpaste.com"
