@@ -148,7 +148,7 @@ STATICFILES_FINDERS = (
 
 #if not DEBUG:
 COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+#COMPRESS_OFFLINE = True
 
 #COMPRESS_YUGLIFY_BINARY = 'yuglify' # assumes yuglify is in your path
 #COMPRESS_YUGLIFY_CSS_ARGUMENTS = '--terminal'
