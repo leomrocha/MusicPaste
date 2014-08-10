@@ -35,18 +35,19 @@ ALLOWED_HOSTS = []
 #Email configuration
 ###############################################################################
 #With my email
-#EMAIL_HOST = "mail.musicpaste.com"
-#EMAIL_PORT = 587
-#EMAIL_HOST_USER = "no-reply@musicpaste.com"
-#EMAIL_HOST_PASSWORD = "qM!6*Dvn"
-#EMAIL_USE_TLS = True
+EMAIL_HOST = "mail.musicpaste.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "no-reply@musicpaste.com"
+EMAIL_HOST_PASSWORD = "qM!6*Dvn"
+EMAIL_USE_TLS = True
 
 #With MANDRILL
-EMAIL_HOST = 'smtp.mandrillapp.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
-EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
-EMAIL_USE_TLS = True
+#EMAIL_USE_TLS = False
+#EMAIL_HOST = 'smtp.mandrillapp.com'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
+#EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
+
 
 #email templates
 TEMPLATE_DIRS = (

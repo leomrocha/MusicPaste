@@ -37,7 +37,7 @@ def edit_score(request):
             new_sheet = form.save()
             #print "new sheet = ", new_sheet
             # links to see the results (embed and display)
-            subject = "Hi %s! Here your newly created music sheets", new_sheet.name
+            subject = "Hi %s! Here your newly created music sheets" % new_sheet.name
             embed_link = request.build_absolute_uri(reverse('embed_score', args=[new_sheet.suuid]))
             display_link = request.build_absolute_uri(reverse('display_score', args=[new_sheet.suuid]))
             #print "links: "
@@ -53,8 +53,10 @@ def edit_score(request):
                              }
             t = loader.get_template('simple_basic.email')
             c = Context(email_context)
-            rendered = t.render(c)
+            message = t.render(c)
             print "sending email"
+            send_mail(subject, message, 'no-reply@musicpaste.com',
+                        [new_sheet.email], fail_silently=False)
             # TODO Send email to user
             #Redirect if everything went great
             return HttpResponseRedirect(reverse('thanks')) # Redirect after POST
