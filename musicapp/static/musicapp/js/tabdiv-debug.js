@@ -2726,7 +2726,8 @@ $(function() {if (Vex.Flow.TabDiv.SEL) { Vex.Flow.TabDiv.start() }});
             if (note_value == null) {
               continue;
             }
-            midi_note = (24 + (octave * 12)) + noteValues[note].int_val;
+            //midi_note = (24 + (octave * 12)) + noteValues[note].int_val;
+            midi_note = (octave * 12) + noteValues[note].int_val;
             MIDI.noteOn(0, midi_note, 127, 0);
             _results1.push(MIDI.noteOff(0, midi_note, duration));
           }
