@@ -51,7 +51,7 @@ def edit_score(request):
             htmly = loader.get_template('simple_basic_inlined.email')
             plaintext = loader.get_template('simple_basic.txt')
             c = Context(email_context)
-            print >> sys.stderr, "sending email"
+            #print >> sys.stderr, "sending email"
             sys.stderr.flush()
             #try:
             from_email = 'MusicPaste - Link Service <no-reply@musicpaste.com>'
@@ -60,7 +60,7 @@ def edit_score(request):
             msg = EmailMultiAlternatives(subject, text_content, from_email, [new_sheet.email])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
-            print >> sys.stderr, "email sent"
+            #print >> sys.stderr, "email sent"
             sys.stderr.flush()
             #except Exception as e:
             #    print "ERROR sending email: ", e
