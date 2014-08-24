@@ -52,7 +52,7 @@ def edit_score(request):
             plaintext = loader.get_template('simple_basic.txt')
             c = Context(email_context)
             #print >> sys.stderr, "sending email"
-            sys.stderr.flush()
+            #sys.stderr.flush()
             #try:
             from_email = 'MusicPaste - Link Service <no-reply@musicpaste.com>'
             text_content = plaintext.render(c)
@@ -61,7 +61,7 @@ def edit_score(request):
             msg.attach_alternative(html_content, "text/html")
             msg.send()
             #print >> sys.stderr, "email sent"
-            sys.stderr.flush()
+            #sys.stderr.flush()
             #except Exception as e:
             #    print "ERROR sending email: ", e
             #    sys.stdout.flush()
@@ -71,7 +71,7 @@ def edit_score(request):
         else:
             print "The form is not valid"
             print form.errors
-            print "is not valid because ... ?"
+            #print "is not valid because ... ?"
             #reload the page but with the elements given already pre-filled 
             #and a warning telling about the errors
             #TODO modify the template to take in account the given post data
