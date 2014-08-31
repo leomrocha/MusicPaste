@@ -6,11 +6,13 @@ import shortuuid
 #import uuid
 
 # Create your models here.
-
+def random_uuid():
+    return shortuuid.ShortUUID().random(length=22)
+    
 class Sheet(models.Model):
     """
     """
-    suuid = models.CharField(max_length=64, default=shortuuid.ShortUUID().random(length=22), editable=False) 
+    suuid = models.CharField(max_length=64, default=random_uuid, editable=False) 
     #suuid = models.CharField(max_length=64, default=str(uuid.uuid4()).replace('-',''), editable=False)
     title = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
