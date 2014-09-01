@@ -63,6 +63,7 @@ mainApp.directive('vexchord', function($compile){
 });
 
 
+
 mainApp.controller('vextabController', ['$scope', function($scope) {
     //console.log("paper starting");
     //console.log($scope);
@@ -232,7 +233,22 @@ notes :8 5/5 5/4 5/3 ^3^ :16 5-6-7-8/1 :8 9s10/1 :h s9v/1\n\
     };
     
 }]);
-  
+
+mainApp.controller('fretboardController', ['$scope', function($scope) {
+    console.log("fretboard paper starting");
+    
+    $scope.parseOK = false;
+    $scope.parseError = "All is GOOOOD";
+    
+    $scope.vextabText = "";
+
+    $scope.initText = function(fretboardText) {
+        //This function is sort of private constructor for controller
+        $scope.fretboardText = fretboardText;
+    };
+    
+}]);
+
 mainApp.directive('vextabPaper', ['$compile', function($compile) {
     //console.log("paper starting")
     var canvas = document.createElement('canvas');
@@ -324,3 +340,71 @@ mainApp.directive('vextabPaper', ['$compile', function($compile) {
         link: link
     };
   }]);
+  
+
+guitarDemo.directive('fretboardPaper', ['$compile', function($compile) {
+    //console.log("starting fretboard paper");
+    //var canvas = document.createElement('canvas');
+    //canvas.className = "fretboard-canvas";
+    var fretboard = null;
+    //var ps  = null;
+    var sel = "#fretboardDiv";
+    var containerSel = "#fretboardContainer";
+
+    function link(scope, element, attrs) {
+        //update parent things:
+        scope.fretboard = fretboard;
+        var fretboardLevel;
+        
+        function updateFretboard() {
+            //console.log("updating fretboard");
+            //console.log(fretboardLevel);
+            try {
+                //console.log("parsing!");
+                //OK, this is the cannon to a fly way:
+                //erase element
+                $(containerSel).empty();
+                if(fretboardLevel !== null && fretboardLevel !== undefined && fretboardLevel != 'undefined' && fretboardLevel.length >1 ){
+                    //recreate the element
+                    var ne = angular.element('<div id="fretboardDiv"></div>');
+                    ne.text(fretboardLevel);
+                    //binding and appending
+                    $compile(ne)(scope);
+                    $(containerSel).append(ne);
+                    //add element
+                    //now use the FretboardDiv as it is
+                    fretboard = new Vex.Flow.FretboardDiv(sel);
+                    fretboard.build(fretboardLevel);
+                }
+                //recompile for showing it
+                $compile($(sel))(scope);
+            }
+            catch (e) {
+                console.log("Error");
+                console.log(e);
+            }      
+            //$compile(canvas)(scope);
+            //element.append(canvas);
+            //reposition player because something breaks on the default
+            /*if(fretboard !== null && fretboard !== undefined){
+                //TODO
+                var el = $(sel);
+                //console.log("everything is new here: ", el);
+                $compile(el)(scope);
+            }*/
+        }
+
+        scope.$watch(attrs.fretboardPaper, function(value) {
+            //console.log("changing fretboard text to: ", value);
+            fretboardLevel = value;
+            updateFretboard();
+        });
+
+    }
+
+    return {
+        transclude:true,
+        link: link
+    };
+  }]);
+  

@@ -65,12 +65,16 @@
         <hr>
         {% block fretboard-all %}
         <div class="row" ng-app="MusicPaste">
-            <div ng-controller="vextabController">
+            <div ng-controller="fretboardController">
                 {% block fretboard-display-all %}
                 <div class="col-lg-7 col-md-7">
                         {% block fretboard-display %}
                         <div>
                             <div data-fretboard-paper="fretboardText">
+                            </div>
+                            <div data-fretboard-paper="fretboardLevel" id="fretboardContainer">
+                                <div id="fretboardDiv"></div>
+                                <div id="dummyDiv"></div>
                             </div>
                         </div>
                         {% endblock %}
@@ -85,7 +89,7 @@
                           </h2>
                     </div>
                     <div>
-                        <textarea form="save-form" id="id_content" name= "content" ng-model="vextabText" class="editor editable" rows="25" columns="40" maxlength="8192"></textarea>
+                        <textarea form="save-form" id="id_content" name= "content" ng-model="fretboardText" class="editor editable" rows="25" columns="40" maxlength="1024"></textarea>
                     </div>
                     <div class="parseResults" style="color:#960003;" ng-show="parseOK === false">
                         <p>
